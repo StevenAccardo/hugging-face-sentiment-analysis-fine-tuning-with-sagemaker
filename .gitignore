@@ -1,0 +1,7 @@
+.env
+.python-version
+test-trainer/
+sentiment-model/
+training-output/
+training-output-accuracy/
+__pycache__/

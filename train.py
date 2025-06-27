@@ -2,7 +2,6 @@ from datasets import load_dataset
 from transformers import AutoTokenizer, AutoModelForSequenceClassification, TrainingArguments, Trainer
 from sklearn.metrics import accuracy_score, f1_score
 import numpy as np
-import torch
 
 # 1. Load IMDB dataset (already split into 'train' and 'test')
 # Dataset doesn't come with validation/eval dataset, so needed to split out training dataset to create one. Or could have used test dataset, but rather save that for actual testing

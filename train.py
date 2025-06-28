@@ -84,13 +84,13 @@ data_collator = DataCollatorWithPadding(tokenizer=tokenizer)
 # I've chosen 4 epochs since we have the load_best_model_at_end option checked
 training_args = TrainingArguments(
   output_dir='./training-output', # The output directory where the model predictions and checkpoints will be written.
-  eval_strategy='epoch', # When to run evaluation: every 'epoch', 'steps', or 'no'
+  evaluation_strategy='epoch', # When to run evaluation: every 'epoch', 'steps', or 'no'
   save_strategy='epoch', # How often the model weights and etc are saved
   logging_dir='./training-logs', # Where to write logs (for TensorBoard or debugging)
   learning_rate=2e-5, # Base learning rate for the optimizer (AdamW by default)
   per_device_train_batch_size=8, # Batch size per GPU (or CPU) during training
   per_device_eval_batch_size=8, # Batch size per GPU (or CPU) during evaluation
-  num_train_epochs=4, # Number of full passes through the training dataset (Default is 3)
+  num_train_epochs=1, # Number of full passes through the training dataset (Default is 3)
   weight_decay=0.01, # L2 regularization: helps prevent overfitting
   load_best_model_at_end=True, # At end of training, load the checkpoint with best eval score
   metric_for_best_model='eval_loss', # Use in conjunction with `load_best_model_at_end` to specify the metric to use to compare two different models. Must be the name of a metric returned by the evaluation with or without the prefix `"eval_"`.
@@ -112,15 +112,6 @@ trainer = Trainer(
 # 10. Train the model
 trainer.train()
 
-# 11. Evaluate the final model on test set
-# Uncomment if another evaluation is needed
-# eval_results = trainer.evaluate()
-# print('Evaluation results:', eval_results)
-
-# 12. Test the resulting model using the test dataset
-# test_results = trainer.evaluate(tokenized_dataset['test'])
-# print('Tests results:', test_results)
-
-# 13. Save model and tokenizer (optional)
-model.save_pretrained('./sentiment-model')
-tokenizer.save_pretrained('./sentiment-model')
+# 11. Save model and tokenizer (optional)
+model.save_pretrained('/opt/ml/model')
+tokenizer.save_pretrained('/opt/ml/model')
